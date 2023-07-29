@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using NewPlatformService.Data;
 using NewPlatformService.DTOs;
 using NewPlatformService.Models;
+using NewPlatformService.SyncDataServices.Http;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,11 +20,16 @@ namespace NewPlatformService.Controllers
     {
         private readonly IPlatformRepo _plantformRepo;
         private readonly IMapper _mapper;
+        private readonly ICommandDataClient _commandDataClient;
 
-        public PlatformsController(IPlatformRepo plantformRepo, IMapper mapper)
+        public PlatformsController(
+            IPlatformRepo plantformRepo,
+            IMapper mapper,
+            ICommandDataClient commandDataClient)
         {
             _plantformRepo = plantformRepo;
             _mapper = mapper;
+            _commandDataClient = commandDataClient;
         }
         // GET: api/values
         [HttpGet]
@@ -51,14 +57,22 @@ namespace NewPlatformService.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult Post([FromBody] PlatformCreateDTO value)
+        public async Task<ActionResult<PlatformReadDTO>> CreatePlatform([FromBody] PlatformCreateDTO value)
         {
             var platform = _mapper.Map<Platform>(value);
             _plantformRepo.CreatePlatform(platform);
             var result = _plantformRepo.SaveChanges();
             var responseDTO = _mapper.Map<PlatformReadDTO>(platform);
+            try
+            {
+                await _commandDataClient.SendPlantformToCommand(responseDTO);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
             return result ?
-                CreatedAtRoute(nameof(GetPlatformById), new { Id = responseDTO.Id }, responseDTO) :
+                CreatedAtRoute(nameof(GetPlatformById), new { responseDTO.Id }, responseDTO) :
                 BadRequest();
         }
     }
