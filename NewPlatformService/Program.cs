@@ -3,7 +3,7 @@ using NewPlatformService.Data;
 using NewPlatformService.SyncDataServices.Http;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Configuration.AddJsonFile("appsettings.Production.json");
 // Add services to the container.
 
 builder.Services.AddControllers();

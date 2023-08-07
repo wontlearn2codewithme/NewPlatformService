@@ -41,4 +41,7 @@
     <Folder Include="SyncDataServices\" />
     <Folder Include="SyncDataServices\Http\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="appsettings.Production.json" />
+  </ItemGroup>
 </Project>

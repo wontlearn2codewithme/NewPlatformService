@@ -22,7 +22,7 @@ namespace NewPlatformService.SyncDataServices.Http
                 JsonSerializer.Serialize(platformReadDTO),
                 Encoding.UTF8,
                 "application/json");
-
+            Console.WriteLine("here is de url!: " + _configuration["CommandServiceCheck"]);
             var response = await _httpClient.PostAsync(_configuration["CommandServiceCheck"], httpContent);
 
             if (response.IsSuccessStatusCode)
