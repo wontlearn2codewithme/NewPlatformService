@@ -18,7 +18,7 @@ get kubernetes version
 kubectl version --short
 
 apply the selected yaml file
-kubernetes apply -f file.yaml
+kubectl apply -f file.yaml
 
 kubectl get pods/services/deployments
 
