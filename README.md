@@ -12,7 +12,7 @@ tag image for publishing
 docker tag newplatformservice:1.0.0 wontlearn2codewithme/newplatformservice
 
 push image to dockerhub 
-docker push wontlearn2codewithme/newplatformservice:1.0.0
+docker push wontlearn2codewithme/newplatformservice:latest
 
 get kubernetes version
 kubectl version --short
@@ -20,9 +20,11 @@ kubectl version --short
 apply the selected yaml file
 kubectl apply -f file.yaml
 
-kubectl get pods/services/deployments
+kubectl get pods/services/deployments/storageclass
 
 kubectl delete deployment/pod/service name
 
  -Restart deployment
 - kubectl rollout restart deployment platforms-depl
+- 
+
