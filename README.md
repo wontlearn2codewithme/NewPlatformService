@@ -24,5 +24,5 @@ kubectl get pods/services/deployments
 
 kubectl delete deployment/pod/service name
 
-Restart deployment
+ -Restart deployment
 - kubectl rollout restart deployment platforms-depl

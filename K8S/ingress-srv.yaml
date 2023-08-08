@@ -9,17 +9,18 @@ spec:
   rules:
     - host: acme.com
       http:
-        paths: 
-          - path: /api/platfroms
+        paths:
+          - path: /api/platforms
             pathType: Prefix
-            backend: 
+            backend:
               service:
                 name: platforms-clusterip-srv
-                port: 
+                port:
                   number: 80
-          - path: /api/commands/platforms
+          - path: /api/c/platforms
             pathType: Prefix
-            backend: 
+            backend:
               service:
-                name: commandsservice-clusterip-srv
-                port: 80
+                name: commands-clusterip-srv
+                port:
+                  number: 80
