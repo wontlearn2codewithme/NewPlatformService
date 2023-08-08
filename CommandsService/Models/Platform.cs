@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NewPlatformService.Models
+namespace CommandsService.Models
 {
     public class Platform
     {
@@ -10,8 +10,7 @@ namespace NewPlatformService.Models
         [Required]
         public required string Name { get; set; } = string.Empty;
         [Required]
-        public required string Publisher { get; set; } = string.Empty;
-        [Required]
-        public required string Cost { get; set; } = string.Empty;
+        public required int ExternalID { get; set; }
+        public virtual ICollection<Command> Commands { get; set; } = new List<Command>();
     }
 }
