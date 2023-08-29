@@ -6,7 +6,7 @@ namespace NewPlatformService.Models
     {
         [Key]
         [Required]
-        public required int Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public required string Name { get; set; } = string.Empty;
         [Required]
